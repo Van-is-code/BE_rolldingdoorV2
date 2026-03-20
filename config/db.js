@@ -1,7 +1,7 @@
 ﻿const { Sequelize } = require("sequelize");
 
 // Hardcoded DB config (migrated from .env for deployment)
-const DATABASE_URL = "postgresql://postgres:@Van0862215231@db.pmtqgnrqpciyumujauos.supabase.co:5432/postgres";
+const DATABASE_URL = "postgres://thiepcuoi_coanh:jczhgjugsnvukpuo@localhost:5432/rolldingdoor_service2";
 const USE_SSL = true;
 
 const sequelize = new Sequelize(DATABASE_URL, {

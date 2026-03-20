@@ -16,7 +16,7 @@ const HIVEMQ_PASSWORD = "@Van02092005";
 const HIVEMQ_PORT = 8883;
 const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "admin123";
-const API_PORT = process.env.PORT || 3000;
+const API_PORT = process.env.PORT || 4000;
 
 const app = express();
 
