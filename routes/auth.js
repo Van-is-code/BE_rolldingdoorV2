@@ -1,11 +1,11 @@
-﻿const express = require("express");
+const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const { protect, isAdmin } = require("../middleware/auth");
 
-// Hardcoded JWT secret (migrated from .env for deployment)
-const JWT_SECRET = "aGV0aG9uZ2N1YWN1b24=";
+// JWT Secret
+const JWT_SECRET = process.env.JWT_SECRET || "aGV0aG9uZ2N1YWN1b24=";
 
 // POST /auth/login
 router.post("/login", async (req, res) => {

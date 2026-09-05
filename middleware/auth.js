@@ -1,8 +1,8 @@
-﻿const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// Hardcoded JWT secret (migrated from .env for deployment)
-const JWT_SECRET = "aGV0aG9uZ2N1YWN1b24=";
+// JWT Secret
+const JWT_SECRET = process.env.JWT_SECRET || "aGV0aG9uZ2N1YWN1b24=";
 
 // Middleware xác thực token
 exports.protect = async (req, res, next) => {

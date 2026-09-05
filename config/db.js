@@ -1,8 +1,9 @@
-﻿const { Sequelize } = require("sequelize");
+require("dotenv").config();
+const { Sequelize } = require("sequelize");
 
-// Hardcoded DB config (migrated from .env for deployment)
-const DATABASE_URL = "postgres://thiepcuoi_coanh:jczhgjugsnvukpuo@localhost:5432/rolldingdoor_service2";
-const USE_SSL = true;
+// Database configuration (Ưu tiên đọc từ .env để linh hoạt khi deploy)
+const DATABASE_URL = process.env.DATABASE_URL || "postgres://thiepcuoi_coanh:jczhgjugsnvukpuo@localhost:5432/rolldingdoor_service2";
+const USE_SSL = process.env.USE_SSL === "true";
 
 const sequelize = new Sequelize(DATABASE_URL, {
   dialect: "postgres",

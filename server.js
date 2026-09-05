@@ -1,4 +1,5 @@
-﻿const express = require("express");
+require("dotenv").config();
+const express = require("express");
 const cors = require("cors");
 const mqtt = require("mqtt");
 const { sequelize, connectDB } = require("./config/db");
@@ -9,13 +10,13 @@ const User = require("./models/User");
 const Schedule = require("./models/Schedule");
 const Log = require("./models/Log");
 
-// Hardcoded config (migrated from .env for deployment)
-const HIVEMQ_CLUSTER_URL = "c131d19cf9b3498ab5655988b219498f.s1.eu.hivemq.cloud";
-const HIVEMQ_USERNAME = "cbgbar";
-const HIVEMQ_PASSWORD = "@Van02092005";
-const HIVEMQ_PORT = 8883;
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin123";
+// Config (Ưu tiên đọc từ .env, fallback cấu hình mặc định)
+const HIVEMQ_CLUSTER_URL = process.env.HIVEMQ_CLUSTER_URL || "c131d19cf9b3498ab5655988b219498f.s1.eu.hivemq.cloud";
+const HIVEMQ_USERNAME = process.env.HIVEMQ_USERNAME || "cbgbar";
+const HIVEMQ_PASSWORD = process.env.HIVEMQ_PASSWORD || "@Van02092005";
+const HIVEMQ_PORT = parseInt(process.env.HIVEMQ_PORT, 10) || 8883;
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
 const API_PORT = process.env.PORT || 4000;
 
 const app = express();
