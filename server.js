@@ -4,11 +4,13 @@ const cors = require("cors");
 const mqtt = require("mqtt");
 const { sequelize, connectDB } = require("./config/db");
 const Scheduler = require("./services/Scheduler");
+const { runMigrations } = require("./services/migrations");
 
 // Import all models
 const User = require("./models/User");
 const Schedule = require("./models/Schedule");
 const Log = require("./models/Log");
+const QuickLink = require("./models/QuickLink");
 
 // Config (Ưu tiên đọc từ .env, fallback cấu hình mặc định)
 const HIVEMQ_CLUSTER_URL = process.env.HIVEMQ_CLUSTER_URL || "c131d19cf9b3498ab5655988b219498f.s1.eu.hivemq.cloud";
@@ -86,6 +88,19 @@ app.use((req, res, next) => {
 // Định nghĩa Routes Express
 app.use("/auth", require("./routes/auth"));
 app.use("/api", require("./routes/api"));
+app.use("/api/quick-links", require("./routes/quickLinks"));
+
+// Liên kết sử dụng nhanh — KHÔNG cần đăng nhập. Xem routes/public.js.
+app.use("/q", require("./routes/public"));
+
+// Kiểm tra sức khoẻ, dùng cho uptime monitor
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    mqtt: mqttClient && mqttClient.connected ? "connected" : "disconnected",
+    time: new Date().toISOString(),
+  });
+});
 
 // Tạo tài khoản Admin
 const createAdminAccount = async () => {
@@ -107,6 +122,8 @@ const createAdminAccount = async () => {
 const bootstrap = async () => {
   try {
     await connectDB();
+    // Phải chạy SAU sync: sync({alter:false}) không sửa được bảng/enum đã tồn tại.
+    await runMigrations();
     await scheduler.start();
     await createAdminAccount();
 
