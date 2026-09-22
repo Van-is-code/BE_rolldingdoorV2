@@ -17,6 +17,15 @@ const HIVEMQ_CLUSTER_URL = process.env.HIVEMQ_CLUSTER_URL || "c131d19cf9b3498ab5
 const HIVEMQ_USERNAME = process.env.HIVEMQ_USERNAME || "cbgbar";
 const HIVEMQ_PASSWORD = process.env.HIVEMQ_PASSWORD || "@Van02092005";
 const HIVEMQ_PORT = parseInt(process.env.HIVEMQ_PORT, 10) || 8883;
+/**
+ * Giao thuc MQTT. Truoc day hardcode "mqtts" nen khong tro duoc sang broker noi bo
+ * khong TLS. Mac dinh van la "mqtts" de khong doi hanh vi cu.
+ *   mqtts = TLS (HiveMQ Cloud, port 8883)
+ *   mqtt  = khong TLS (Mosquitto noi bo, port 1883)
+ */
+const MQTT_PROTOCOL = process.env.MQTT_PROTOCOL || "mqtts";
+/** Dat "true" khi broker noi bo dung chung chi tu ky. */
+const MQTT_INSECURE = process.env.MQTT_INSECURE === "true";
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
 const API_PORT = process.env.PORT || 4000;
@@ -27,7 +36,8 @@ const app = express();
 const mqttOptions = {
   host: HIVEMQ_CLUSTER_URL,
   port: HIVEMQ_PORT,
-  protocol: "mqtts",
+  protocol: MQTT_PROTOCOL,
+  ...(MQTT_PROTOCOL === "mqtts" && MQTT_INSECURE ? { rejectUnauthorized: false } : {}),
   username: HIVEMQ_USERNAME,
   password: HIVEMQ_PASSWORD,
   clientId: `backend_nodejs_${Math.random().toString(16).substr(2, 8)}`,
