@@ -84,14 +84,14 @@ git push origin main
 **QUAN TRỌNG:** Phải thêm các biến môi trường sau trên Koyeb Dashboard:
 
 ```bash
-DATABASE_URL=postgresql://postgres:@Van0862215231@db.qzhxidaqvlxwdyungcyr.supabase.co:5432/postgres
-HIVEMQ_CLUSTER_URL=c131d19cf9b3498ab5655988b219498f.s1.eu.hivemq.cloud
-HIVEMQ_USERNAME=cbgbar
-HIVEMQ_PASSWORD=@Van02092005
+DATABASE_URL=postgresql://<user>:<password>@<host>:5432/<database>
+HIVEMQ_CLUSTER_URL=<cluster-id>.s1.eu.hivemq.cloud
+HIVEMQ_USERNAME=<hivemq-username>
+HIVEMQ_PASSWORD=<hivemq-password>
 HIVEMQ_PORT=8883
-JWT_SECRET=aGV0aG9uZ2N1YWN1b24=
+JWT_SECRET=<chuoi-ngau-nhien-cua-ban>
 ADMIN_USERNAME=admin
-ADMIN_PASSWORD=admin123
+ADMIN_PASSWORD=<mat-khau-manh-cua-ban>
 NODE_ENV=production
 ```
 
@@ -128,7 +128,7 @@ Trong Koyeb Dashboard > Services > Your Service > Logs, bạn phải thấy:
 curl https://YOUR_APP_URL.koyeb.app/auth/login \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"username":"admin","password":"admin123"}'
+  -d '{"username":"admin","password":"<mat-khau-cua-ban>"}'
 ```
 
 Kết quả mong đợi:

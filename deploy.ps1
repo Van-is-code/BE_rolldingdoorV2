@@ -1,4 +1,4 @@
-﻿# ==============================================================================
+# ==============================================================================
 # SCRIPT DEPLOY CHO WINDOWS (POWERSHELL)
 # ==============================================================================
 
@@ -28,13 +28,13 @@ if (-not (Test-Path $envPath)) {
 PORT=4000
 DATABASE_URL=postgres://postgres:postgres@localhost:5432/rolldingdoor_service2
 USE_SSL=false
-JWT_SECRET=aGV0aG9uZ2N1YWN1b24=
-HIVEMQ_CLUSTER_URL=c131d19cf9b3498ab5655988b219498f.s1.eu.hivemq.cloud
+JWT_SECRET=<chuoi-ngau-nhien-cua-ban>
+HIVEMQ_CLUSTER_URL=<cluster-id>.s1.eu.hivemq.cloud
 HIVEMQ_PORT=8883
-HIVEMQ_USERNAME=cbgbar
-HIVEMQ_PASSWORD=@Van02092005
+HIVEMQ_USERNAME=<hivemq-username>
+HIVEMQ_PASSWORD=<hivemq-password>
 ADMIN_USERNAME=admin
-ADMIN_PASSWORD=admin123
+ADMIN_PASSWORD=<mat-khau-manh-cua-ban>
 "@ | Out-File -FilePath $envPath -Encoding utf8
     }
     Write-Host "      -> Da tao file .env." -ForegroundColor Green
