@@ -42,7 +42,7 @@ fi
 # 3. Kiem tra file .env
 DB_NAME="rolldingdoor_service2"
 DB_USER="rolldoor_user"
-DB_PASS="RolldoorPass2026@"
+DB_PASS="${DB_PASS:?Dat bien DB_PASS truoc khi chay, vi du: DB_PASS='...' ./deploy.sh}"
 
 if [ ! -f "$APP_DIR/.env" ]; then
     echo -e "${YELLOW}[3/6] File .env chua ton tai. Dang tao tu mau .env.example...${NC}"
